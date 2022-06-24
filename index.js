@@ -6,6 +6,7 @@ let $timeHeader = document.querySelector('#time-header');
 let $resultHeader = document.querySelector('#result-header');
 let $gameTime = document.querySelector('#game-time');
 
+let colors = ['red', 'blue', 'green', 'yellow', 'pink'];
 let score = 0;
 let isGameStarted = false;
 
@@ -85,18 +86,38 @@ function renderBox() {
     let gameSize = $game.getBoundingClientRect();
     let maxTop = gameSize.height - boxSize;
     let maxLeft = gameSize.width - boxSize;
+    let randomColorIndex = getRandom(0, colors.length - 1)
 
     box.style.height = box.style.width = boxSize + 'px';
     box.style.position = 'absolute';
-    box.style.backgroundColor = '#000';
+    box.style.backgroundColor = colors[randomColorIndex];
     box.style.top = getRandom(0, maxTop) + 'px';
     box.style.left = getRandom(0, maxLeft) + 'px';
     box.style.cursor = 'pointer';
-    box.setAttribute('data-box', true)
+    box.setAttribute('data-box', true);
+    // box.style.backgroundColor = changeColor(box) // //Генерация случайного цвета 2 вариант
+
+    
+
 
 
     $game.insertAdjacentElement('afterbegin', box);
 }
+
+function changeColor(square) {
+    let result = square.style.backgroundColor = randomInteger(100000, 900080);
+    let cuple = '#' + result;
+    return cuple
+
+
+}
+    //Генерация случайного цвета 2 вариант
+
+// function randomInteger(min, max) {
+//     return Math.floor(Math.random() * (max - min + 1)) + min;
+// }
+
+
 
 function getRandom(min, max) {
     return Math.floor(Math.random() * (max - min) + min) 
